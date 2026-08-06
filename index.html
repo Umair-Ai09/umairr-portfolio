@@ -192,8 +192,7 @@
 
         try {
             // THIS LINE FIXES THE ERROR - we use a proxy
-            const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(API_URL + '?key=' + API_KEY)}`;
-            
+            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(API_URL + '?key=' + API_KEY)}`;
             const response = await fetch(proxyUrl, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},

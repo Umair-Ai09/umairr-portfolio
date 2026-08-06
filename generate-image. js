@@ -1,38 +1,15 @@
+import Replicate from "replicate";
+
+const replicate = new Replicate({
+  auth: process.env.REPLICATE_API_TOKEN,
+});
+
 export default async function handler(req, res) {
-  if (req.method!== 'POST') return res.status(405).json({ error: 'Method not allowed' });
-
+  if (req.method!== 'POST') return res.status(405).json({error: "Method not allowed"});
+  const { prompt } = req.body;
   try {
-    const { prompt } = req.body;
-    const betterPrompt = `${prompt}. Educational diagram, clean, labeled, white background, for O Level students`;
-
-    const response = await fetch('https://api.replicate.com/v1/predictions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Token ${process.env.REPLICATE_API_TOKEN}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        version: "stability-ai/sdxl:39ed52f2a78e93472b166cf206e7c2d7b4f0e1a9f7c4c2a7b8c9d0e1f2a3b4c5",
-        input: { prompt: betterPrompt }
-      })
-    });
-
-    let prediction = await response.json();
-    
-    while (prediction.status!== "succeeded" && prediction.status!== "failed") {
-      await new Promise(r => setTimeout(r, 1000));
-      const poll = await fetch(`https://api.replicate.com/v1/predictions/${prediction.id}`, {
-        headers: { 'Authorization': `Token ${process.env.REPLICATE_API_TOKEN}` }
-      });
-      prediction = await poll.json();
-    }
-
-    if (prediction.status === "succeeded") {
-      return res.status(200).json({ image_url: prediction.output[0] });
-    } else {
-      throw new Error(prediction.error);
-    }
-
+    const output = await replicate.run("black-forest-labs/flux-schnell", { input: { prompt } });
+    res.status(200).json({ imageUrl: output[0] });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

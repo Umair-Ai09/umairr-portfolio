@@ -3,276 +3,157 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Umair Mazhar | AI & Web Developer</title>
+  <title>Umair | AI Developer & Web Designer</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      color: #e2e8f0;
-      line-height: 1.7;
-    }
-    .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background: #0d0d0d; color: #e0e0e0; scroll-behavior: smooth; }
+    .container { max-width: 1200px; margin: auto; padding: 20px; }
     
-    nav {
-      background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(10px);
-      padding: 20px 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    nav .container { display: flex; justify-content: space-between; align-items: center; }
-    nav h2 { color: #38bdf8; }
-    nav a { color: #e2e8f0; text-decoration: none; margin-left: 25px; font-weight: 500; }
-    nav a:hover { color: #38bdf8; }
-
-    .hero { text-align: center; padding: 100px 20px; }
-    .hero h1 { font-size: 3.5rem; color: #fff; margin-bottom: 10px; }
-    .hero .subtitle { font-size: 1.3rem; color: #38bdf8; font-weight: 600; margin-bottom: 20px; }
-    .btn {
-      display: inline-block; background: #06b6d4; color: #0f172a;
-      padding: 14px 32px; border-radius: 50px; text-decoration: none;
-      font-weight: bold; font-size: 1.1rem; transition: 0.3s; margin-top: 20px; border: none; cursor: pointer;
-    }
-    .btn:hover { background: #22d3ee; transform: translateY(-2px); }
-
-    section { padding: 80px 0; }
-    h2 { font-size: 2.5rem; color: #38bdf8; text-align: center; margin-bottom: 40px; }
+    header { text-align: center; padding: 100px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; margin-bottom: 40px; }
+    header h1 { font-size: 3.5rem; color: #fff; }
+    header p { font-size: 1.3rem; color: #ddd; margin-top: 10px; }
+    nav { margin-top: 30px; }
+    nav a { color: #fff; margin: 0 20px; text-decoration: none; font-weight: bold; font-size: 1.1rem; }
+    nav a:hover { text-decoration: underline; }
     
-    .card {
-      background: #1e293b; padding: 25px; border-radius: 15px;
-      margin: 20px 0; border-left: 4px solid #38bdf8;
-    }
-    .skill {
-      display: inline-block; background: #334155; padding: 8px 16px;
-      border-radius: 25px; margin: 6px; font-size: 14px;
-    }
+    section { background: #1a1a1a; padding: 50px 40px; border-radius: 15px; margin-bottom: 40px; border: 1px solid #333; }
+    h2 { font-size: 2.2rem; margin-bottom: 25px; color: #667eea; border-left: 4px solid #667eea; padding-left: 15px; }
     
-    #ai-product { background: #0f172a; }
-    .ai-hero { text-align: center; padding: 60px 20px; background: rgba(30, 41, 59, 0.5); border-radius: 20px; }
-    .user-msg { background: #1e40af; padding: 12px 16px; border-radius: 10px; margin: 10px 0; max-width: 80%; margin-left: auto; }
-    .ai-msg { background: #334155; padding: 12px 16px; border-radius: 10px; margin: 10px 0; max-width: 80%; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .card { background: #222; padding: 25px; border-radius: 12px; text-align: center; border: 1px solid #444; transition: 0.3s; }
+    .card:hover { transform: translateY(-5px); border-color: #667eea; }
+    
+    .tool-box { background: #222; padding: 30px; border-radius: 15px; margin-top: 25px; border: 1px solid #444; }
+    .tool-box input, .tool-box textarea { width: 100%; padding: 14px; margin: 12px 0; border-radius: 8px; border: 1px solid #555; background: #111; color: #fff; font-size: 1rem; }
+    .tool-box button { width: 100%; padding: 15px; border-radius: 8px; border: none; background: linear-gradient(90deg, #667eea, #764ba2); color: #fff; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
+    .tool-box button:hover { opacity: 0.85; }
+    .result-box { margin-top: 20px; text-align: center; min-height: 50px; }
+    .result-box img { max-width: 100%; border-radius: 12px; margin-top: 15px; }
+    .result-box a { color: #667eea; font-weight: bold; font-size: 1.1rem; }
+    
+    footer { text-align: center; padding: 40px; color: #777; }
   </style>
 </head>
 <body>
-
-  <nav>
-    <div class="container">
-      <h2>Umair Mazhar</h2>
-      <div>
+  <div class="container">
+    
+    <!-- HEADER -->
+    <header>
+      <h1>Umair</h1>
+      <p>AI Developer | Full Stack Web Designer | Automation Expert</p>
+      <nav>
         <a href="#about">About</a>
-        <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
-        <a href="#ai-product">AI Study Buddy</a>
-      </div>
-    </div>
-  </nav>
+        <a href="#services">Services</a>
+        <a href="#tools">AI Tools</a>
+      </nav>
+    </header>
 
-  <section class="hero">
-    <div class="container">
-      <h1>Umair Mazhar</h1>
-      <p class="subtitle">AI & Web Developer | O Level Student</p>
-      <p>Building AI solutions and web experiences that create impact</p>
-      <a href="#projects" class="btn">Explore My Portfolio</a>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="container">
+    <!-- ABOUT SECTION -->
+    <section id="about">
       <h2>About Me</h2>
-      <div class="card">
-        <p>Hello! I'm <b>Umair Mazhar</b>, an O Level student passionate about Artificial Intelligence, software development, and modern technology. I enjoy participating in internships, learning new technologies, and building projects that help me grow both technically and personally. My long-term vision is to combine technology with social impact by creating solutions that improve lives and empower communities.</p>
-      </div>
-    </div>
-  </section>
+      <p>
+        Hello! I'm <b>Umair</b> from Lahore, Pakistan. 
+        I'm a passionate developer who loves building AI-powered websites, apps, and automation tools. 
+        <br><br>
+        <b>Education:</b> FSc Pre-Engineering<br>
+        <b>Focus:</b> AI, Web Development, and creating tools that solve real problems.
+      </p>
+    </section>
 
-  <section id="projects">
-    <div class="container">
-      <h2>Projects & Achievements</h2>
-      <div class="card">
-        <h3>🤖 AI Builder Boot Camp</h3>
-        <p>Completed an AI Builder Boot Camp where I learned the fundamentals of Artificial Intelligence, prompt engineering, GitHub, and web development. Built multiple AI-powered tools and deployed them on the web.</p>
-      </div>
-      
-      <div class="card">
-        <h3>🔵 Alkhidmat Summer Internship</h3>
-        <p>Successfully participated in the Alkhidmat Summer Internship Program, gaining valuable experience in teamwork, leadership, and community service. Contributed to social impact projects.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills">
-    <div class="container">
+    <!-- SKILLS SECTION -->
+    <section id="skills">
       <h2>Skills</h2>
-      <div style="text-align: center;">
-        <span class="skill">HTML5</span>
-        <span class="skill">CSS3</span>
-        <span class="skill">JavaScript</span>
-        <span class="skill">Artificial Intelligence</span>
-        <span class="skill">Prompt Engineering</span>
-        <span class="skill">GitHub</span>
-        <span class="skill">Leadership</span>
-        <span class="skill">Problem Solving</span>
+      <div class="grid">
+        <div class="card">HTML5 & CSS3</div>
+        <div class="card">JavaScript & React</div>
+        <div class="card">Node.js & Express</div>
+        <div class="card">Python</div>
+        <div class="card">AI APIs: Replicate, OpenAI, Groq</div>
+        <div class="card">Vercel & GitHub Deployment</div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- AI STUDY BUDDY PRODUCT - ONLY 1 SECTION NOW -->
-  <section id="ai-product">
-    <div class="container">
-      <h2>AI Study Buddy</h2>
-      <p style="text-align: center; color: #94a3b8; margin-bottom: 20px;">Your Personal AI Learning Assistant. Ask me anything and I’ll explain it to you</p>
+    <!-- SERVICES SECTION -->
+    <section id="services">
+      <h2>Services</h2>
+      <div class="grid">
+        <div class="card">AI Website Development</div>
+        <div class="card">Modern Portfolio Websites</div>
+        <div class="card">AI Chatbots & Tools</div>
+        <div class="card">PDF & Paper Generation</div>
+        <div class="card">API Integration</div>
+        <div class="card">UI/UX Design</div>
+      </div>
+    </section>
+
+    <!-- AI TOOLS SECTION -->
+    <section id="tools">
+      <h2>AI Tools</h2>
       
-      <div id="chatbox" style="background: #1e293b; border-radius: 15px; padding: 20px; margin-top: 30px;">
-        <div id="chat-log" style="height: 400px; overflow-y: auto; padding: 15px; background: #0f172a; border-radius: 10px; margin-bottom: 15px;">
-          <div class="ai-msg">👋 Hey! I'm your AI Study Buddy. Ask me: "Explain Newton's 3rd Law"</div>
-        </div>
-        <div id="chat-input-area" style="display: flex; gap: 10px;">
-          <input type="text" id="user-input" placeholder="Ask me anything..." style="flex: 1; padding: 14px; border-radius: 10px; border: 1px solid #334155; background: #0f172a; color: #fff; font-size: 16px;">
-          <button class="btn" id="sendBtn">Send</button>
-        </div>
+      <!-- AI IMAGE GENERATOR -->
+      <div class="tool-box">
+        <h3>1. AI Image Generator ✨</h3>
+        <p>Describe any image you can imagine and AI will create it in 15 seconds.</p>
+        <input type="text" id="image-prompt" placeholder="e.g. A cyberpunk city in Lahore at night">
+        <button onclick="generateImage()">Generate Image</button>
+        <div id="image-result" class="result-box"></div>
       </div>
-    </div>
-  </section>
-<!-- AI IMAGE GENERATOR SECTION -->
-<section id="ai-image" class="container">
-  <h2>🎨 AI Image Generator</h2>
-  <p style="text-align: center; color: #94a3b8; margin-bottom: 20px;">
-    Describe any diagram, concept, or image and I'll generate it
-  </p>
-  
-  <div style="background: #1e293b; border-radius: 15px; padding: 20px;">
-    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-      <input type="text" id="image-prompt" placeholder="Ex: Diagram of water cycle for O Levels" 
-        style="flex: 1; padding: 14px; border-radius: 10px; border: 1px solid #334155; background: #0f172a; color: #fff; font-size: 16px;">
-      <button class="btn" onclick="generateImage()">Generate ✨</button>
-    </div>
-    <div id="image-result" style="min-height: 300px; background: #0f172a; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #64748b;">
-      Your generated image will appear here
-    </div>
+
+      <!-- AI PAPER GENERATOR -->
+      <div class="tool-box">
+        <h3>2. AI Paper & PDF Generator 📄</h3>
+        <p>Enter a subject and topic. AI will create 10 important questions and give you a PDF.</p>
+        <input type="text" id="paper-subject" placeholder="e.g. Computer Science">
+        <textarea id="paper-topic" rows="3" placeholder="e.g. Important questions from Chapter 1 to 5"></textarea>
+        <button onclick="generatePaper()">Generate Paper PDF</button>
+        <div id="paper-result" class="result-box"></div>
+      </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>© 2026 Umair. Built with AI and Coffee ☕</p>
+    </footer>
+
   </div>
-</section>
-  <footer style="text-align: center; padding: 40px 20px; color: #94a3b8;">
-    <p>© 2026 Umair Mazhar. Built with passion ❤️</p>
-  </footer>
 
-<script>
-    const chatLog = document.getElementById('chat-log');
-    const userInput = document.getElementById('user-input');
-    const sendBtn = document.getElementById('sendBtn');
-
-    async function sendMessage() {
-        const message = userInput.value.trim();
-        if (message === "") return;
-        
-        chatLog.innerHTML += `<div class="user-msg"><b>You:</b> ${message}</div>`;
-        userInput.value = "";
-
-        // Show "typing..."
-        chatLog.innerHTML += `<div class="ai-msg" id="loading"><b>AI Buddy:</b> Thinking... 🤔</div>`;
-        chatLog.scrollTop = chatLog.scrollHeight;
-
-        try {
-            // THIS IS THE MAGIC PROMPT - MAKES IT CRAZY SMART
-            const systemPrompt = `You are Umair's AI Study Buddy for O Level students. 
-            Rules:
-            1. If user asks for NOTES: Give clean bullet points, headings, and key terms.
-            2. If user asks to SOLVE: Show step-by-step working, then final answer.
-            3. If user asks for PAST PAPERS: Create 5 exam-style questions with marks.
-            4. If user asks to QUIZ: Ask 3 MCQs one by one.
-            5. Always be encouraging, use emojis, and explain simply.
-            6. Use markdown: **bold** for headings, *italic* for key terms.`;
-
-            const response = await fetch("/api/groq", {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({ 
-                    question: systemPrompt + "\n\nStudent Question: " + message 
-                })
-            });
-            const data = await response.json();
-            
-            if(!response.ok) throw new Error(data.error?.message || "API Error")
-
-            const reply = data.choices[0].message.content;
-            
-            // Remove loading and add real answer
-            document.getElementById('loading').remove();
-            chatLog.innerHTML += `<div class="ai-msg"><b>AI Buddy:</b><br>${reply.replace(/\n/g, '<br>')}</div>`;
-        } catch(error) {
-            document.getElementById('loading').remove();
-            chatLog.innerHTML += `<div style="color:red"><b>Error:</b> ${error.message}</div>`;
-        }
-        chatLog.scrollTop = chatLog.scrollHeight;
-    }
-
-    sendBtn.addEventListener("click", sendMessage);
-    userInput.addEventListener("keypress", (e) => { if (e.key === "Enter") sendMessage(); });
- async function generateImage() {
-    const prompt = document.getElementById('image-prompt').value.trim();
+  <script>
+  // FUNCTION 1: IMAGE GENERATOR
+  async function generateImage() {
+    const prompt = document.getElementById('image-prompt').value;
     const resultDiv = document.getElementById('image-result');
-
-    if (!prompt) {
-        alert("Please write a prompt first");
-        return;
-    }
-    
-    resultDiv.innerHTML = "<p>Generating Image... this takes 10-15 seconds ⏳</p>";
-
+    if (!prompt) { alert("Please enter a prompt"); return; }
+    resultDiv.innerHTML = "Generating... please wait 15 seconds ⏳";
     try {
-        const response = await fetch('/api/generate-image', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt })
-        });
+      const response = await fetch('/api/generate-image', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: prompt })
+      });
+      const data = await response.json();
+      if (data.image) { resultDiv.innerHTML = `<img src="${data.image}" alt="Generated Image" />`; } 
+      else { resultDiv.innerHTML = "Error: " + (data.error || "No image returned"); }
+    } catch (error) { resultDiv.innerHTML = "Failed to connect to API. Check Vercel logs."; }
+  }
 
-        const data = await response.json();
-if (data.image) {
-  resultDiv.innerHTML = `<img src="${data.image}" style="max-width:100%; border-radius:12px; margin-top:10px;">`;
-        
-            resultDiv.innerHTML = `<img src="${data.imageUrl}" style="max-width:100%; border-radius:12px; margin-top:10px;" />`;
-        } else {
-            resultDiv.innerHTML = `<p style="color:red">Error: ${data.error}</p>`;
-        }
-    } catch (error) {
-        resultDiv.innerHTML = `<p style="color:red">Network Error: ${error.message}</p>`;
-    }
-}
-} else {
-    resultDiv.innerHTML = `<p style="color:red">Error: ${data.error}</p>`;
-}
-    
-}
-<script>
-async function generateImage() {
-  const prompt = document.getElementById('image-prompt').value;
-  const resultDiv = document.getElementById('image-result');
-  
-  if (!prompt) {
-    alert("Please enter a prompt");
-    return;
+  // FUNCTION 2: PAPER GENERATOR
+  async function generatePaper() {
+    const subject = document.getElementById('paper-subject').value;
+    const topic = document.getElementById('paper-topic').value;
+    const resultDiv = document.getElementById('paper-result');
+    if (!subject || !topic) { alert("Please enter subject and topic"); return; }
+    resultDiv.innerHTML = "Creating your paper... ⏳";
+    try {
+      const response = await fetch('/api/generate-paper', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subject: subject, topic: topic })
+      });
+      const data = await response.json();
+      if (data.pdfUrl) { resultDiv.innerHTML = `<a href="${data.pdfUrl}" download="paper.pdf" target="_blank">Click Here to Download PDF</a>`; } 
+      else { resultDiv.innerHTML = "Error: " + (data.error || "No PDF returned"); }
+    } catch (error) { resultDiv.innerHTML = "Failed to connect to API."; }
   }
-  
-  resultDiv.innerHTML = "Generating... please wait 15 seconds ⏳";
-  
-  try {
-    const response = await fetch('/api/generate-image', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt: prompt })
-    });
-    
-    const data = await response.json();
-    
-    if (data.image) {
-      resultDiv.innerHTML = `<img src="${data.image}" style="max-width:100%; border-radius:12px; margin-top:10px;" />`;
-    } else {
-      resultDiv.innerHTML = "Error: " + (data.error || "No image returned");
-    }
-  } catch (error) {
-    resultDiv.innerHTML = "Failed to connect. Check Vercel logs.";
-    console.error(error);
-  }
-}
-</script>
+  </script>
+</body>
+</html>

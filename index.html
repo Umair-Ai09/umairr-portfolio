@@ -214,9 +214,22 @@
     const resultDiv = document.getElementById('image-result');
     
     if (!prompt) return;
-    resultDiv.innerHTML = `<p>Generating image... this takes 10 seconds 🎨</p>`;
+    resultDiv.innerHTML = "<p>Generating Image... this takes 10 seconds ⏳</p>";
+
+const response = await fetch('/api/generate-image', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt })
+});
+
+const data = await response.json();
+
+if (data.imageUrl) {
+    resultDiv.innerHTML = `<img src="${data.imageUrl}" style="max-width:100%; border-radius:12px;" />`;
+} else {
+    resultDiv.innerHTML = `<p style="color:red">Error: ${data.error}</p>`;
+}
     
-    alert("Tell me the prompt here and I’ll generate the image for you right now!");
 }
 </script>
 <!-- Trigger redeploy for REPLICATE_API_TOKEN -->

@@ -169,13 +169,16 @@
 </body>
 
 <script>
-    // IMPORTANT: ASK FOR GEMINI API KEY
-    const API_KEY = prompt("Enter your Gemini API Key:");
-    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+    let API_KEY = "";
+    
+    // Ask for key as soon as page loads
+    API_KEY = prompt("Enter your Gemini API Key:");
+
+    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent`;
 
     const chatLog = document.getElementById('chat-log');
     const userInput = document.getElementById('user-input');
-    const sendBtn = document.getElementById('sendBtn'); // THIS connects your blue button
+    const sendBtn = document.getElementById('sendBtn');
 
     async function sendMessage() {
         const message = userInput.value.trim();
@@ -184,13 +187,14 @@
             return;
         }
         
-        // Show your message
         chatLog.innerHTML += `<p><b>You:</b> ${message}</p>`;
         userInput.value = "";
 
-        // Call Gemini
         try {
-            const response = await fetch(API_URL, {
+            // THIS LINE FIXES THE ERROR - we use a proxy
+            const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(API_URL + '?key=' + API_KEY)}`;
+            
+            const response = await fetch(proxyUrl, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({contents: [{parts: [{text: message}]}]})
@@ -199,19 +203,11 @@
             const reply = data.candidates[0].content.parts[0].text;
             chatLog.innerHTML += `<p><b>AI Buddy:</b> ${reply}</p>`;
         } catch(error) {
-            chatLog.innerHTML += `<p style="color:red"><b>Error:</b> Check your API key</p>`;
+            chatLog.innerHTML += `<p style="color:red"><b>Error:</b> ${error.message}</p>`;
         }
-        
-        chatLog.scrollTop = chatLog.scrollHeight; // auto scroll down
+        chatLog.scrollTop = chatLog.scrollHeight;
     }
 
-    // Make Send button work
     sendBtn.addEventListener("click", sendMessage);
-    
-    // Make Enter key work
-    userInput.addEventListener("keypress", function(event) {
-        if (event.key === "Enter") { sendMessage(); }
-    });
+    userInput.addEventListener("keypress", (e) => { if (e.key === "Enter") sendMessage(); });
 </script>
-</body>
-</html>

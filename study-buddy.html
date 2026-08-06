@@ -3,63 +3,112 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Study Buddy - Umair Mazhar</title>
-  <link rel="stylesheet" href="style.css">
+  <title>AI Study Buddy | Umair Mazhar</title>
   <style>
-    body { background: #0a0a0a; color: white; font-family: Arial; }
-    .chat-container { max-width: 700px; margin: 40px auto; background: #1a1a1a; padding: 20px; border-radius: 12px; }
-    .chat-box { height: 400px; overflow-y: auto; border: 1px solid #333; padding: 15px; border-radius: 8px; margin-bottom: 15px; background: #111; }
-    .msg { margin: 10px 0; padding: 10px; border-radius: 8px; }
-    .user { background: #2d5cff; text-align: right; }
-    .bot { background: #333; }
-    .input-area { display: flex; gap: 10px; }
-    .input-area input { flex: 1; padding: 12px; border-radius: 8px; border: none; background: #222; color: white; }
-    .input-area button { padding: 12px 20px; background: #2d5cff; border: none; border-radius: 8px; color: white; cursor: pointer; }
-    header { text-align:center; padding:20px; }
-    header a { color: #2d5cff; text-decoration: none; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      background: rgba(30, 41, 59, 0.5);
+      border-radius: 20px;
+      margin-bottom: 40px;
+    }
+    h1 {
+      font-size: 3rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      color: #38bdf8;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .btn {
+      display: inline-block;
+      background: #06b6d4;
+      color: #0f172a;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: 0.3s;
+      margin-top: 20px;
+    }
+    .btn:hover {
+      background: #22d3ee;
+      transform: translateY(-2px);
+    }
+    .card {
+      background: #1e293b;
+      padding: 25px;
+      border-radius: 15px;
+      margin: 20px 0;
+      border-left: 4px solid #38bdf8;
+    }
+    h2 {
+      color: #38bdf8;
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+    }
+    .skill {
+      display: inline-block;
+      background: #334155;
+      padding: 8px 16px;
+      border-radius: 25px;
+      margin: 6px;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>AI Study Buddy</h1>
-    <p>Ask me any O-Level Math, Science, or CS question!</p>
-    <a href="index.html">← Back to Portfolio</a>
-  </header>
+  <div class="container">
+    
+    <div class="hero">
+      <h1>AI Study Buddy</h1>
+      <p class="subtitle">Your Personal AI Learning Assistant</p>
+      <p>Ask questions, get explanations, and study smarter with AI</p>
+      <a href="#about" class="btn">Get Started</a>
+    </div>
 
-  <div class="chat-container">
-    <div class="chat-box" id="chatBox">
-      <div class="msg bot">Hi! I'm your AI Study Buddy 🤖 What do you want to learn today?</div>
+    <h2>About Me</h2>
+    <div class="card">
+      <p>Hello! I'm <b>Umair Mazhar</b>, an O Level student passionate about Artificial Intelligence, software development, and modern technology. I enjoy participating in internships, learning new technologies, and building projects that help me grow both technically and personally. My long-term vision is to combine technology with social impact by creating solutions that improve lives and empower communities.</p>
     </div>
-    <div class="input-area">
-      <input type="text" id="userInput" placeholder="Type your question... e.g. What is Pythagoras theorem?">
-      <button onclick="sendMessage()">Send</button>
+
+    <h2>Projects & Achievements</h2>
+    <div class="card">
+      <h3>🤖 AI Builder Boot Camp</h3>
+      <p>Completed an AI Builder Boot Camp where I learned the fundamentals of Artificial Intelligence, prompt engineering, GitHub, and web development.</p>
     </div>
+    
+    <div class="card">
+      <h3>🔵 Alkhidmat Summer Internship</h3>
+      <p>Successfully participated in the Alkhidmat Summer Internship Program, gaining valuable experience in teamwork, leadership, and community service.</p>
+    </div>
+
+    <h2>Skills</h2>
+    <div>
+      <span class="skill">HTML5</span>
+      <span class="skill">CSS3</span>
+      <span class="skill">Artificial Intelligence</span>
+      <span class="skill">Prompt Engineering</span>
+      <span class="skill">GitHub</span>
+      <span class="skill">Leadership</span>
+    </div>
+
   </div>
-
-  <script>
-    const answers = {
-      "pythagoras": "Pythagoras Theorem: In a right triangle, a² + b² = c². Where c is the hypotenuse.",
-      "photosynthesis": "Photosynthesis: Plants use sunlight, CO2, and water to make glucose and oxygen.",
-      "algorithm": "An Algorithm is a step-by-step procedure to solve a problem.",
-      "ai": "Artificial Intelligence is the ability of machines to perform tasks that need human intelligence.",
-      "default": "That's a great question! Ask me about Math, Science, or CS basics for O-Levels."
-    };
-    function sendMessage() {
-      const input = document.getElementById("userInput");
-      const chatBox = document.getElementById("chatBox");
-      const question = input.value.toLowerCase();
-      if(question === "") return;
-      chatBox.innerHTML += `<div class="msg user">${input.value}</div>`;
-      let reply = answers.default;
-      for(let key in answers) { if(question.includes(key)) { reply = answers[key]; break; } }
-      setTimeout(() => {
-        chatBox.innerHTML += `<div class="msg bot">${reply}</div>`;
-        chatBox.scrollTop = chatBox.scrollHeight;
-      }, 500);
-      input.value = "";
-    }
-    document.getElementById("userInput").addEventListener("keypress", function(e) { if(e.key === "Enter") sendMessage(); });
-  </script>
 </body>
 </html>
-    <!-- deployed 2026-08-06 -->

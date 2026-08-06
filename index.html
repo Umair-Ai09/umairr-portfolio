@@ -169,34 +169,22 @@
 </body>
 
 <script>
-    let API_KEY = "";
-    
-    // Ask for key as soon as page loads
-    API_KEY = prompt("Enter your Gemini API Key:");
-
-    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent`;
-
     const chatLog = document.getElementById('chat-log');
     const userInput = document.getElementById('user-input');
     const sendBtn = document.getElementById('sendBtn');
 
     async function sendMessage() {
         const message = userInput.value.trim();
-        if (message === "" ||!API_KEY) {
-            alert("Please enter a message and API key");
-            return;
-        }
+        if (message === "") return;
         
         chatLog.innerHTML += `<p><b>You:</b> ${message}</p>`;
         userInput.value = "";
 
         try {
-            // THIS LINE FIXES THE ERROR - we use a proxy
-            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(API_URL + '?key=' + API_KEY)}`;
-            const response = await fetch(proxyUrl, {
+            const response = await fetch("/api/gemini", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({contents: [{parts: [{text: message}]}]})
+                body: JSON.stringify({message: message})
             });
             const data = await response.json();
             const reply = data.candidates[0].content.parts[0].text;

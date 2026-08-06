@@ -152,19 +152,39 @@
         chatLog.innerHTML += `<div class="user-msg"><b>You:</b> ${message}</div>`;
         userInput.value = "";
 
+        // Show "typing..."
+        chatLog.innerHTML += `<div class="ai-msg" id="loading"><b>AI Buddy:</b> Thinking... 🤔</div>`;
+        chatLog.scrollTop = chatLog.scrollHeight;
+
         try {
+            // THIS IS THE MAGIC PROMPT - MAKES IT CRAZY SMART
+            const systemPrompt = `You are Umair's AI Study Buddy for O Level students. 
+            Rules:
+            1. If user asks for NOTES: Give clean bullet points, headings, and key terms.
+            2. If user asks to SOLVE: Show step-by-step working, then final answer.
+            3. If user asks for PAST PAPERS: Create 5 exam-style questions with marks.
+            4. If user asks to QUIZ: Ask 3 MCQs one by one.
+            5. Always be encouraging, use emojis, and explain simply.
+            6. Use markdown: **bold** for headings, *italic* for key terms.`;
+
             const response = await fetch("/api/groq", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({ question: message }) // FIX 1: changed to 'question'
+                body: JSON.stringify({ 
+                    question: systemPrompt + "\n\nStudent Question: " + message 
+                })
             });
             const data = await response.json();
             
             if(!response.ok) throw new Error(data.error?.message || "API Error")
 
-            const reply = data.choices[0].message.content; // FIX 2: GROQ format not Gemini
-            chatLog.innerHTML += `<div class="ai-msg"><b>AI Buddy:</b> ${reply}</div>`;
+            const reply = data.choices[0].message.content;
+            
+            // Remove loading and add real answer
+            document.getElementById('loading').remove();
+            chatLog.innerHTML += `<div class="ai-msg"><b>AI Buddy:</b><br>${reply.replace(/\n/g, '<br>')}</div>`;
         } catch(error) {
+            document.getElementById('loading').remove();
             chatLog.innerHTML += `<div style="color:red"><b>Error:</b> ${error.message}</div>`;
         }
         chatLog.scrollTop = chatLog.scrollHeight;
@@ -173,6 +193,3 @@
     sendBtn.addEventListener("click", sendMessage);
     userInput.addEventListener("keypress", (e) => { if (e.key === "Enter") sendMessage(); });
 </script>
-
-</body>
-</html>

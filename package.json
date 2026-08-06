@@ -1,0 +1,8 @@
+{
+  "name": "umairr-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio with AI Image Generation",
+  "dependencies": {
+    "replicate": "^0.29.0"
+  }
+}

@@ -169,57 +169,49 @@
 </body>
 
 <script>
-  // ⚠️ IMPORTANT: PASTE YOUR GEMINI API KEY HERE
-  const API_KEY = prompt("Enter your gemini API key:);
-  const API_KEY = prompt("Enter your Gemini API key:");
-  const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+    // IMPORTANT: ASK FOR GEMINI API KEY
+    const API_KEY = prompt("Enter your Gemini API Key:");
+    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
-  const chatLog = document.getElementById('chat-log');
-  const userInput = document.getElementById('user-input');
+    const chatLog = document.getElementById('chat-log');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('sendBtn'); // THIS connects your blue button
 
-  userInput.addEventListener("keypress", function(event) {
-    if (event.key === "Enter") { sendMessage(); }
-  });
-
-  async function sendMessage() {
-    const message = userInput.value.trim();
-    if (message === "") return;
-
-    chatLog.innerHTML += `<div class="msg user-msg" style="background: #06b6d4; color: #0f172a; padding: 12px 16px; border-radius: 10px; margin: 10px 0; margin-left: auto; text-align: right; max-width: 80%;">${message}</div>`;
-    userInput.value = "";
-    chatLog.scrollTop = chatLog.scrollHeight;
-
-    chatLog.innerHTML += `<div class="msg ai-msg" id="loading" style="background: #334155; padding: 12px 16px; border-radius: 10px; margin: 10px 0; max-width: 80%;">AI is thinking...</div>`;
-    chatLog.scrollTop = chatLog.scrollHeight;
-
-    try {
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: `You are AI Study Buddy. Explain clearly for students. Question: ${message}` }]
-        })
-      });
-      const data = await response.json();
-      const aiReply = data.candidates[0].content.parts[0].text;
-
-      document.getElementById('loading').remove();
-      chatLog.innerHTML += `<div class="msg ai-msg" style="background: #334155; padding: 12px 16px; border-radius: 10px; margin: 10px 0; max-width: 80%;">${aiReply}</div>`;
-      chatLog.scrollTop = chatLog.scrollHeight;
-    } catch (error) {
-      document.getElementById('loading').remove();
-      chatLog.innerHTML += `<div class="msg ai-msg">Sorry, something went wrong. Check your API key.</div>`;
-    }
-  }
-</script>
-</html>
-
+    async function sendMessage() {
+        const message = userInput.value.trim();
+        if (message === "" ||!API_KEY) {
+            alert("Please enter a message and API key");
+            return;
+        }
         
+        // Show your message
+        chatLog.innerHTML += `<p><b>You:</b> ${message}</p>`;
+        userInput.value = "";
 
-  
-  <footer style="text-align: center; padding: 40px 20px; color: #94a3b8;">
-    <p>© 2026 Umair Mazhar. Built with passion ❤️</p>
-  </footer>
+        // Call Gemini
+        try {
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({contents: [{parts: [{text: message}]}]})
+            });
+            const data = await response.json();
+            const reply = data.candidates[0].content.parts[0].text;
+            chatLog.innerHTML += `<p><b>AI Buddy:</b> ${reply}</p>`;
+        } catch(error) {
+            chatLog.innerHTML += `<p style="color:red"><b>Error:</b> Check your API key</p>`;
+        }
+        
+        chatLog.scrollTop = chatLog.scrollHeight; // auto scroll down
+    }
 
+    // Make Send button work
+    sendBtn.addEventListener("click", sendMessage);
+    
+    // Make Enter key work
+    userInput.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") { sendMessage(); }
+    });
+</script>
 </body>
 </html>

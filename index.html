@@ -244,9 +244,35 @@ if (data.image) {
 }
     
 }
-</script>
 <script>
-function generateImage() {
-  alert("Button clicked! It works");
+async function generateImage() {
+  const prompt = document.getElementById('image-prompt').value;
+  const resultDiv = document.getElementById('image-result');
+  
+  if (!prompt) {
+    alert("Please enter a prompt");
+    return;
+  }
+  
+  resultDiv.innerHTML = "Generating... please wait 15 seconds ⏳";
+  
+  try {
+    const response = await fetch('/api/generate-image', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt: prompt })
+    });
+    
+    const data = await response.json();
+    
+    if (data.image) {
+      resultDiv.innerHTML = `<img src="${data.image}" style="max-width:100%; border-radius:12px; margin-top:10px;" />`;
+    } else {
+      resultDiv.innerHTML = "Error: " + (data.error || "No image returned");
+    }
+  } catch (error) {
+    resultDiv.innerHTML = "Failed to connect. Check Vercel logs.";
+    console.error(error);
+  }
 }
 </script>

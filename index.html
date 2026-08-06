@@ -228,8 +228,9 @@
         });
 
         const data = await response.json();
-
-        if (data.imageUrl) {
+if (data.image) {
+  resultDiv.innerHTML = `<img src="${data.image}" style="max-width:100%; border-radius:12px; margin-top:10px;">`;
+        
             resultDiv.innerHTML = `<img src="${data.imageUrl}" style="max-width:100%; border-radius:12px; margin-top:10px;" />`;
         } else {
             resultDiv.innerHTML = `<p style="color:red">Error: ${data.error}</p>`;

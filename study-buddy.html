@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Study Buddy - Umair Mazhar</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { background: #0a0a0a; color: white; font-family: Arial; }
+    .chat-container { max-width: 700px; margin: 40px auto; background: #1a1a1a; padding: 20px; border-radius: 12px; }
+    .chat-box { height: 400px; overflow-y: auto; border: 1px solid #333; padding: 15px; border-radius: 8px; margin-bottom: 15px; background: #111; }
+    .msg { margin: 10px 0; padding: 10px; border-radius: 8px; }
+    .user { background: #2d5cff; text-align: right; }
+    .bot { background: #333; }
+    .input-area { display: flex; gap: 10px; }
+    .input-area input { flex: 1; padding: 12px; border-radius: 8px; border: none; background: #222; color: white; }
+    .input-area button { padding: 12px 20px; background: #2d5cff; border: none; border-radius: 8px; color: white; cursor: pointer; }
+    header { text-align:center; padding:20px; }
+    header a { color: #2d5cff; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AI Study Buddy</h1>
+    <p>Ask me any O-Level Math, Science, or CS question!</p>
+    <a href="index.html">← Back to Portfolio</a>
+  </header>
+
+  <div class="chat-container">
+    <div class="chat-box" id="chatBox">
+      <div class="msg bot">Hi! I'm your AI Study Buddy 🤖 What do you want to learn today?</div>
+    </div>
+    <div class="input-area">
+      <input type="text" id="userInput" placeholder="Type your question... e.g. What is Pythagoras theorem?">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const answers = {
+      "pythagoras": "Pythagoras Theorem: In a right triangle, a² + b² = c². Where c is the hypotenuse.",
+      "photosynthesis": "Photosynthesis: Plants use sunlight, CO2, and water to make glucose and oxygen.",
+      "algorithm": "An Algorithm is a step-by-step procedure to solve a problem.",
+      "ai": "Artificial Intelligence is the ability of machines to perform tasks that need human intelligence.",
+      "default": "That's a great question! Ask me about Math, Science, or CS basics for O-Levels."
+    };
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const chatBox = document.getElementById("chatBox");
+      const question = input.value.toLowerCase();
+      if(question === "") return;
+      chatBox.innerHTML += `<div class="msg user">${input.value}</div>`;
+      let reply = answers.default;
+      for(let key in answers) { if(question.includes(key)) { reply = answers[key]; break; } }
+      setTimeout(() => {
+        chatBox.innerHTML += `<div class="msg bot">${reply}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, 500);
+      input.value = "";
+    }
+    document.getElementById("userInput").addEventListener("keypress", function(e) { if(e.key === "Enter") sendMessage(); });
+  </script>
+</body>
+</html>

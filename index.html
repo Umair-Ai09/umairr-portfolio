@@ -186,9 +186,9 @@
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({message: message})
             });
-            const data = await response.json();
-            const reply = data.candidates[0].content.parts[0].text;
-            chatLog.innerHTML += `<p><b>AI Buddy:</b> ${reply}</p>`;
+const data = await response.json();
+          if (!response.ok) throw new Error(data.error?.message || "API Error")
+const reply = data.candidates[0].content.parts[0].text;            chatLog.innerHTML += `<p><b>AI Buddy:</b> ${reply}</p>`;
         } catch(error) {
             chatLog.innerHTML += `<p style="color:red"><b>Error:</b> ${error.message}</p>`;
         }

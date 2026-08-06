@@ -1,118 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Umair Mazhar | Developer & AI Enthusiast</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Umair Mazhar | AI & Web Developer</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-    body { background: #0a0e1a; color: #e5e7eb; line-height: 1.6; }
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #e2e8f0;
+      line-height: 1.7;
+    }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
     
-    header { display: flex; justify-content: space-between; align-items: center; padding: 20px 10%; background: #111827; position: sticky; top: 0; z-index: 10; }
-    header h1 { color: #3b82f6; font-size: 24px; }
-    nav a { color: #e5e7eb; margin: 0 15px; text-decoration: none; transition: 0.3s; }
-    nav a:hover { color: #3b82f6; }
+    nav {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    nav h2 { color: #38bdf8; }
+    nav a { color: #e2e8f0; text-decoration: none; margin-left: 25px; font-weight: 500; }
+    nav a:hover { color: #38bdf8; }
 
-    section { padding: 80px 10%; }
-    .hero { text-align: center; }
-    .hero h2 { font-size: 48px; color: #fff; }
-    .hero h2 span { color: #3b82f6; }
-    .hero p { margin-top: 15px; font-size: 18px; color: #9ca3af; }
+    .hero { text-align: center; padding: 100px 20px; }
+    .hero h1 { font-size: 3.5rem; color: #fff; margin-bottom: 10px; }
+    .hero .subtitle { font-size: 1.3rem; color: #38bdf8; font-weight: 600; margin-bottom: 20px; }
+    .btn {
+      display: inline-block; background: #06b6d4; color: #0f172a;
+      padding: 14px 32px; border-radius: 50px; text-decoration: none;
+      font-weight: bold; font-size: 1.1rem; transition: 0.3s; margin-top: 20px; border: none; cursor: pointer;
+    }
+    .btn:hover { background: #22d3ee; transform: translateY(-2px); }
 
-    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 40px; }
-    .card { background: #111827; padding: 20px; border-radius: 12px; border: 1px solid #1f2937; }
-    .card h3 { color: #3b82f6; margin-bottom: 10px; }
-
-    /* AI STUDY BUDDY SECTION */
-    .ai-section { background: #111827; border-radius: 20px; padding: 40px; max-width: 800px; margin: 0 auto; text-align: center; border: 1px solid #1f2937; }
-    .ai-section .badge { background: #1e3a8a; padding: 10px 20px; border-radius: 50px; display: inline-block; margin-bottom: 20px; color: #93c5fd; }
-    .chat-box { background: #0a0e1a; border-radius: 15px; padding: 20px; min-height: 300px; text-align: left; overflow-y: auto; margin-bottom: 20px; }
-    .user { color: #60a5fa; margin-top: 15px; }
-    .ai { color: #34d399; margin-top: 15px; }
-    .error { color: #ef4444; margin-top: 15px; }
-    .input-area { display: flex; gap: 10px; }
-    .input-area input { flex: 1; padding: 14px; border-radius: 10px; border: 1px solid #374151; background: #0a0e1a; color: #fff; }
-    .input-area button { padding: 14px 25px; background: #3b82f6; border: none; border-radius: 10px; color: #fff; cursor: pointer; font-weight: bold; }
-    .input-area button:hover { background: #2563eb; }
+    section { padding: 80px 0; }
+    h2 { font-size: 2.5rem; color: #38bdf8; text-align: center; margin-bottom: 40px; }
+    
+    .card {
+      background: #1e293b; padding: 25px; border-radius: 15px;
+      margin: 20px 0; border-left: 4px solid #38bdf8;
+    }
+    .skill {
+      display: inline-block; background: #334155; padding: 8px 16px;
+      border-radius: 25px; margin: 6px; font-size: 14px;
+    }
+    
+    #ai-product { background: #0f172a; }
+    .ai-hero { text-align: center; padding: 60px 20px; background: rgba(30, 41, 59, 0.5); border-radius: 20px; }
+    .user-msg { background: #1e40af; padding: 12px 16px; border-radius: 10px; margin: 10px 0; max-width: 80%; margin-left: auto; }
+    .ai-msg { background: #334155; padding: 12px 16px; border-radius: 10px; margin: 10px 0; max-width: 80%; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Umair Mazhar</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#ai">AI Study Buddy</a>
-    </nav>
-  </header>
 
-  <section class="hero" id="about">
-    <h2>Hi, I'm <span>Umair Mazhar</span></h2>
-    <p>Developer | AI Enthusiast | Building cool stuff with code</p>
+  <nav>
+    <div class="container">
+      <h2>Umair Mazhar</h2>
+      <div>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#ai-product">AI Study Buddy</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Umair Mazhar</h1>
+      <p class="subtitle">AI & Web Developer | O Level Student</p>
+      <p>Building AI solutions and web experiences that create impact</p>
+      <a href="#projects" class="btn">Explore My Portfolio</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <div class="card">
+        <p>Hello! I'm <b>Umair Mazhar</b>, an O Level student passionate about Artificial Intelligence, software development, and modern technology. I enjoy participating in internships, learning new technologies, and building projects that help me grow both technically and personally. My long-term vision is to combine technology with social impact by creating solutions that improve lives and empower communities.</p>
+      </div>
+    </div>
   </section>
 
   <section id="projects">
-    <h2 style="text-align:center; margin-bottom: 20px;">My Projects</h2>
-    <div class="projects">
+    <div class="container">
+      <h2>Projects & Achievements</h2>
       <div class="card">
-        <h3>AI Study Buddy</h3>
-        <p>An AI that explains any topic to you in simple words using GROQ.</p>
+        <h3>🤖 AI Builder Boot Camp</h3>
+        <p>Completed an AI Builder Boot Camp where I learned the fundamentals of Artificial Intelligence, prompt engineering, GitHub, and web development. Built multiple AI-powered tools and deployed them on the web.</p>
       </div>
-      <div class="card">
-        <h3>Portfolio Website</h3>
-        <p>This website you are on right now. Built with HTML, CSS, and JS.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- AI STUDY BUDDY SECTION -->
-  <section id="ai">
-    <div class="ai-section">
-      <div class="badge">💡 Hey! I'm your AI Study Buddy</div>
-      <p style="margin-bottom: 20px; color: #9ca3af;">Ask me anything and I'll explain it to you</p>
       
-      <div class="chat-box" id="chat">
-        <p style="color:#6b7280;">Try: "Explain Newton's 3rd Law"</p>
-      </div>
-
-      <div class="input-area">
-        <input type="text" id="userInput" placeholder="Ask a question..." onkeypress="if(event.key==='Enter') sendMessage()" />
-        <button onclick="sendMessage()">Send</button>
+      <div class="card">
+        <h3>🔵 Alkhidmat Summer Internship</h3>
+        <p>Successfully participated in the Alkhidmat Summer Internship Program, gaining valuable experience in teamwork, leadership, and community service. Contributed to social impact projects.</p>
       </div>
     </div>
   </section>
 
-  <script>
+  <section id="skills">
+    <div class="container">
+      <h2>Skills</h2>
+      <div style="text-align: center;">
+        <span class="skill">HTML5</span>
+        <span class="skill">CSS3</span>
+        <span class="skill">JavaScript</span>
+        <span class="skill">Artificial Intelligence</span>
+        <span class="skill">Prompt Engineering</span>
+        <span class="skill">GitHub</span>
+        <span class="skill">Leadership</span>
+        <span class="skill">Problem Solving</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI STUDY BUDDY PRODUCT - ONLY 1 SECTION NOW -->
+  <section id="ai-product">
+    <div class="container">
+      <h2>AI Study Buddy</h2>
+      <p style="text-align: center; color: #94a3b8; margin-bottom: 20px;">Your Personal AI Learning Assistant. Ask me anything and I’ll explain it to you</p>
+      
+      <div id="chatbox" style="background: #1e293b; border-radius: 15px; padding: 20px; margin-top: 30px;">
+        <div id="chat-log" style="height: 400px; overflow-y: auto; padding: 15px; background: #0f172a; border-radius: 10px; margin-bottom: 15px;">
+          <div class="ai-msg">👋 Hey! I'm your AI Study Buddy. Ask me: "Explain Newton's 3rd Law"</div>
+        </div>
+        <div id="chat-input-area" style="display: flex; gap: 10px;">
+          <input type="text" id="user-input" placeholder="Ask me anything..." style="flex: 1; padding: 14px; border-radius: 10px; border: 1px solid #334155; background: #0f172a; color: #fff; font-size: 16px;">
+          <button class="btn" id="sendBtn">Send</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="text-align: center; padding: 40px 20px; color: #94a3b8;">
+    <p>© 2026 Umair Mazhar. Built with passion ❤️</p>
+  </footer>
+
+<script>
+    const chatLog = document.getElementById('chat-log');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('sendBtn');
+
     async function sendMessage() {
-      const input = document.getElementById('userInput');
-      const chat = document.getElementById('chat');
-      const question = input.value.trim();
-      if (!question) return;
-
-      chat.innerHTML += `<div class="user"><b>You:</b> ${question}</div>`;
-      input.value = '';
-      chat.scrollTop = chat.scrollHeight;
-
-      try {
-        const response = await fetch('/api/groq', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ question })
-        });
-
-        const data = await response.json();
+        const message = userInput.value.trim();
+        if (message === "") return;
         
-        if (!response.ok) throw new Error(data.error?.message || "API Error")
+        chatLog.innerHTML += `<div class="user-msg"><b>You:</b> ${message}</div>`;
+        userInput.value = "";
 
-        const reply = data.choices[0].message.content;
-        chat.innerHTML += `<div class="ai"><b>AI:</b> ${reply}</div>`;
+        try {
+            const response = await fetch("/api/groq", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({ question: message }) // FIX 1: changed to 'question'
+            });
+            const data = await response.json();
+            
+            if(!response.ok) throw new Error(data.error?.message || "API Error")
 
-      } catch (error) {
-        chat.innerHTML += `<div class="error"><b>Error:</b> ${error.message}</div>`;
-      }
-      chat.scrollTop = chat.scrollHeight;
+            const reply = data.choices[0].message.content; // FIX 2: GROQ format not Gemini
+            chatLog.innerHTML += `<div class="ai-msg"><b>AI Buddy:</b> ${reply}</div>`;
+        } catch(error) {
+            chatLog.innerHTML += `<div style="color:red"><b>Error:</b> ${error.message}</div>`;
+        }
+        chatLog.scrollTop = chatLog.scrollHeight;
     }
-  </script>
+
+    sendBtn.addEventListener("click", sendMessage);
+    userInput.addEventListener("keypress", (e) => { if (e.key === "Enter") sendMessage(); });
+</script>
+
 </body>
 </html>
